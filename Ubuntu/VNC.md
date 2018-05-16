@@ -73,6 +73,57 @@ Log file is /home/sammy/.vnc/liniverse.com:1.log
 ```
 ## Step 3: Testing the VNC Desktop
 In this step, we'll test the connectivity of your VNC server.
+First, we need to create an SSH connection on your local computer that securely forwards to the `localhost` connection for VNC. You can do this via the terminal on Linux or OS X with following command. Remember to replace `user` and `server_ip_address` with the sudo non-root username and IP address of your server.
+```
+$ ssh -L 5901:127.0.0.1:5901 -N -f -l username server_ip_address
+```
+If you are using a graphical SSH client, like PuTTY, use `server_ip_address` as the connection IP, and set `localhost:5901` as a new forwarded port in the program's SSH tunnel settings.
 
+Next, you may now use a VNC client to attempt a connection to the VNC server at `localhost:5901`. You'll be prompted to authenticate. The correct password to use is the one you set in Step 1.
 
+Once you are connected, you should see something like this
+# Screensot HERE
+
+## Step 4: Creating a VNC Service File
+Next, we'll set up the VNC server as a systemd service. This will make it possible to start, stop, and restart it as needed, like any other systemd service.
+
+First, create a new unit file called `/etc/systemd/system/vncserver@.service` using a text editor:
+```
+$ sudo nano /etc/systemd/system/vncserver@.service
+```
+Copy and paste the following into it. Be sure to change the value of **User** and the username in the value of **PIDFILE** to match your username.
+```
+[Unit]
+Description=Start TightVNC server at startup
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=sammy
+PAMName=login
+PIDFile=/home/sammy/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 :%i
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
+```
+Save and close the file.
+
+Next, make the system aware of the new unit file.
+```
+$ sudo systemctl daemon-reload
+```
+
+Enable the unit file.
+```
+$ sudo systemctl enable vncserver@1.service
+```
+
+The `1` following the `@` sign signifies which display number the service should appear over, in this case the default `:1` as was discussed above. 
+Stop the current instance of the VNC server if it's still running.
+```
+$ vncserver -kill :1
+```
 
