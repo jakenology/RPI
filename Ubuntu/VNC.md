@@ -12,6 +12,11 @@ $ vncserver
 ##### You will then be prompted to enter and verify a password, as well as a view-only password.
 
 ## Step 2: Configuring the VNC Server
-First, we need to tell the VNC server what commands to perform upon startup. These commands are stored in a config file: `xstartup` in `.vnc` of your home directory. The startup script was created when you previously ran the `vncserver` command. The script is not complete and needs to be edited for VNC to work properly.
+First, we need to tell the VNC server what commands to perform upon startup. These commands are stored in a config file: `xstartup` of `.vnc` in your home directory. The script was created when you ran the `vncserver` command. Since we want VNC to work properly, we need to edit the script.
 
-When you first set up VNC, it launches a default server instance on port **5901** This is what you would call a display port, and is referred to by VNC as `:1`. VNC can launch multiple instances on other display ports, like ```:2```, ```:3```, etc. When working with VNC servers, remember that :X is a display port that refers to 5900+X.
+When you first set up VNC, it launches a default server instance on port `5901` This is what you would call a display port, and is referred to by VNC as `:1`. VNC can launch multiple instances on other display ports, like `:2`, `:3`, etc. When working with VNC servers, remember that `:X` is a display port that refers to `5900+X.`
+
+Because we are going to change the configuration of the VNC server, we'll need to stop the VNC server instance that is running on port 5901. To do this, we will use the following command:
+```
+$ vncserver -kill :1
+```
