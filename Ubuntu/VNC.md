@@ -127,3 +127,16 @@ Stop the current instance of the VNC server if it's still running.
 $ vncserver -kill :1
 ```
 
+Then start it as you would start any other systemd service.
+```
+$ sudo systemctl start vncserver@1
+```
+You can verify that it started with this command:
+```
+sudo systemctl status vncserver@1
+```
+
+The server should have started correctly
+
+## Conclusion
+You should now have a secured VNC server up and running on your Ubuntu 16.04 server. Now you'll be able to manage your files, software, and settings with an easy-to-use and familiar graphical interface.
