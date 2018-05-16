@@ -56,6 +56,23 @@ To Save the file:
 ``` 
 y: yes we want to save changes
 ```
+To ensure that the VNC server will be able to use this new startup file properly, we'll need to grant executable privileges to it.
+```
+$ sudo chmod +x ~/.vnc/xstartup
+```
+Now, restart the VNC server.
+```
+$ vncserver
+```
+The server should be started with an output similar to this:
+```
+New 'X' desktop is your_server_name.com:1
+
+Starting applications specified in /home/sammy/.vnc/xstartup
+Log file is /home/sammy/.vnc/liniverse.com:1.log
+```
+## Step 3: Testing the VNC Desktop
+In this step, we'll test the connectivity of your VNC server.
 
 
 
