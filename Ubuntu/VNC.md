@@ -20,3 +20,17 @@ Because we are going to change the configuration of the VNC server, we'll need t
 ```
 $ vncserver -kill :1
 ```
+The output should look like this, with a different PID:
+```
+Killing Xtightvnc process ID 17648
+```
+Before we begin configuring the new `xstartup` file, let's back up the original just in case something goes wrong using the command below:
+```
+$ mv ~/.vnc/xstartup ~/.vnc/xstartup.bak
+```
+Now create a new `xstartup` file using `nano` or a text editor.
+```
+$ nano ~/.vnc/xstartup
+```
+
+
