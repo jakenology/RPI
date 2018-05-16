@@ -32,5 +32,30 @@ Now create a new `xstartup` file using `nano` or a text editor.
 ```
 $ nano ~/.vnc/xstartup
 ```
+Paste these commands into the file so that they are performed automatically whenever you start or restart the VNC server, then save and close the file.
+```
+#!/bin/sh
+
+# Provide a normal GUI
+unset SESSION_MANAGER
+exec /etc/X11/xinit/xinitrc
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+vncconfig -iconic &
+x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+mate-session &
+mate-panel &
+```
+To Close the file:
+```
+Control + X
+```
+To Save the file:
+``` 
+y: yes we want to save changes
+```
+
 
 
