@@ -2,14 +2,14 @@
 
 ## Chronometer 2 Installation Script
 ## Initial Commit
-## Version 0.1.0
+## Version 0.1.1
 ## Copyright 2018 Jayke Peters
 
 ## Install Chronometer 2
 # Change Directory
 cd
 
-# Download Chronometer 2
+# Download Script
 wget -N https://raw.githubusercontent.com/jpmck/chronometer2/master/chronometer2.sh
 
 # Give Execute Permissions
@@ -25,3 +25,9 @@ crontab -l | { cat; echo "# Turn off the PiTFT+ at midnight"; } | crontab -
 crontab -l | { cat; echo "00 00 * * * sh -c 'echo "0" > /sys/class/backlight/soc\:backlight/brightness'"; } | crontab -
 crontab -l | { cat; echo "# Turn on the PiTFT+ at 8:00 am"; } | crontab -
 crontab -l | { cat; echo "00 08 * * * sh -c 'echo "1" > /sys/class/backlight/soc\:backlight/brightness'"; } | crontab -
+
+# Restart Cron
+sudo service cron reload
+
+# Start Chronometer
+./chronometer2 &
