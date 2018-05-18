@@ -1,9 +1,8 @@
 #!/bin/bash
-
 ## Chronometer 2 Installation Script
-## Initial Commit
-## Version 1.0.0
 ## Copyright 2018 Jayke Peters
+## Last Modified 9 May 2018
+## Version 1.0.1
 
 ## Install Chronometer 2
 # Change Directory
@@ -27,7 +26,7 @@ crontab -l | { cat; echo "# Turn on the PiTFT+ at 8:00 am"; } | crontab -
 crontab -l | { cat; echo "00 08 * * * sh -c 'echo "1" > /sys/class/backlight/soc\:backlight/brightness'"; } | crontab -
 
 # Restart Cron
-sudo service cron reload
+service cron reload
 
 # Start Chronometer
 ./chronometer2.sh &
