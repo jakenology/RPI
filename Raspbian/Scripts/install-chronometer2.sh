@@ -2,7 +2,7 @@
 
 ## Chronometer 2 Installation Script
 ## Initial Commit
-## Version 0.1.1
+## Version 1.0.0
 ## Copyright 2018 Jayke Peters
 
 ## Install Chronometer 2
@@ -30,4 +30,4 @@ crontab -l | { cat; echo "00 08 * * * sh -c 'echo "1" > /sys/class/backlight/soc
 sudo service cron reload
 
 # Start Chronometer
-./chronometer2 &
+./chronometer2.sh &
