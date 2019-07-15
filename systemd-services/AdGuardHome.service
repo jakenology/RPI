@@ -1,0 +1,15 @@
+[Unit]
+Description=AdGuard Home service
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/opt/AdGuardHome/AdGuardHome
+ExecStop=/usr/bin/pkill AdGuardHome
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
